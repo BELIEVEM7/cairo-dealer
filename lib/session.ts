@@ -1,0 +1,12 @@
+import { cookies } from "next/headers";
+
+export async function createSession() {
+  const cookieStore = await cookies();
+
+  cookieStore.set("session", "authenticated", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/",
+  });
+}
