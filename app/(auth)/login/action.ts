@@ -1,7 +1,7 @@
 "use server";
 
-import { users } from "@/lib/users";
 import { redirect } from "next/navigation";
+import { authenticateUser } from "@/lib/auth";
 import { createSession } from "@/lib/session";
 
 export type LoginState = {
@@ -12,13 +12,12 @@ export async function loginAction(
   _previousState: LoginState,
   formData: FormData
 ): Promise<LoginState> {
-  const email = formData.get("email");
-  const password = formData.get("password");
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
 
-  const user = users.find(
-    (user) =>
-      user.email === email &&
-      user.password === password
+  const user = await authenticateUser(
+    email,
+    password
   );
 
   if (!user) {

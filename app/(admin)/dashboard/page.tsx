@@ -1,6 +1,15 @@
+import { redirect } from "next/navigation";
+
+import { getSession } from "@/lib/session";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const isAuthenticated = await getSession();
+
+  if (!isAuthenticated) {
+    redirect("/login");
+  }
+
   return (
     <main>
       <header className="flex items-center gap-3 border-b p-4">

@@ -1,7 +1,9 @@
 import CarCard from "@/components/CarCard";
-import { cars } from "@/lib/cars";
+import { getCars } from "@/lib/cars";
 
-export default function Cars() {
+export default async function Cars() {
+  const cars = await getCars();
+
   return (
     <main className="p-6 md:px-8 lg:px-16">
       <h1 className="text-3xl font-bold md:text-5xl lg:text-6xl">

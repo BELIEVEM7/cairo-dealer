@@ -14,7 +14,11 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarInset,
+  SidebarFooter,
 } from "@/components/ui/sidebar";
+
+import { logoutAction } from "@/app/(admin)/dashboard/logout/action";
+import { Button } from "@/components/ui/button";
 
 export default function DashboardSidebar({
   children,
@@ -85,6 +89,17 @@ export default function DashboardSidebar({
             </SidebarGroupContent>
           </SidebarGroup>
         </SidebarContent>
+        <SidebarFooter>
+          <form action={logoutAction}>
+            <Button
+              type="submit"
+              variant="outline"
+              className="w-full"
+            >
+              Logout
+            </Button>
+          </form>
+        </SidebarFooter>
       </Sidebar>
 
       <SidebarInset>

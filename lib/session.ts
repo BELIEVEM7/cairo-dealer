@@ -10,3 +10,17 @@ export async function createSession() {
     path: "/",
   });
 }
+
+export async function getSession() {
+  const cookieStore = await cookies();
+
+  const session = cookieStore.get("session");
+
+  return session?.value === "authenticated";
+}
+
+export async function deleteSession() {
+  const cookieStore = await cookies();
+
+  cookieStore.delete("session");
+}

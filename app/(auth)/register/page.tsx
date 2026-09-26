@@ -1,3 +1,9 @@
+"use client";
+
+import { useActionState } from "react";
+import { registerAction } from "@/app/(auth)/register/action";
+
+
 import Link from "next/link";
 import AuthForm from "@/components/AuthForm";
 
@@ -6,13 +12,23 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 
+
+
+
 export default function RegisterPage() {
+  
+  const [state, formAction] = useActionState(
+  registerAction,
+  {}
+);
   return (
     <AuthForm
       title="Create an account"
       description="Join Cairo Motors."
     >
-      <form className="space-y-4">
+      <form 
+        action={formAction}
+        className="space-y-4">
         <div className="space-y-2">
           <Label htmlFor="name">
             Full Name
@@ -20,6 +36,7 @@ export default function RegisterPage() {
 
           <Input
             id="name"
+            name="name"
             type="text"
             placeholder="Your full name"
           />
@@ -32,6 +49,7 @@ export default function RegisterPage() {
 
           <Input
             id="email"
+            name="email"
             type="email"
             placeholder="you@example.com"
           />
@@ -44,6 +62,7 @@ export default function RegisterPage() {
 
           <Input
             id="password"
+            name="password"
             type="password"
             placeholder="Create a password"
           />
@@ -56,6 +75,7 @@ export default function RegisterPage() {
 
           <Input
             id="confirm-password"
+            name="confirmPassword"
             type="password"
             placeholder="Confirm your password"
           />
@@ -85,6 +105,12 @@ export default function RegisterPage() {
             .
           </Label>
         </div>
+
+        {state.error && (
+          <p className="text-sm text-destructive">
+            {state.error}
+          </p>
+        )}
 
         <Button
           type="submit"
