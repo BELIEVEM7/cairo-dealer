@@ -5,5 +5,5 @@ export type Car = {
   year: number;
   sold: boolean;
   featured: boolean;
-  description?: string; /*? Means description is optional */
+  description: string | null;
 };

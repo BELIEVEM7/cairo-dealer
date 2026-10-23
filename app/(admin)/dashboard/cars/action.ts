@@ -1,6 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
+import { requireAdmin } from "@/lib/session";
 
 export type CarActionState = {
   error?: string;
@@ -10,6 +11,7 @@ export type CarActionState = {
 export async function createCarAction(
   formData: FormData
 ): Promise<CarActionState> {
+  const user = await requireAdmin();
   // 1. Get values from the form
   const name = formData.get("name") as string;
   const price = Number(formData.get("price"));
@@ -58,6 +60,7 @@ export async function createCarAction(
       description: description.trim(),
       sold: false,
       featured: false,
+      userId: user.id,
     },
   });
 

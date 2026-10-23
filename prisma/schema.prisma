@@ -25,7 +25,21 @@ model User {
   role      UserRole @default(Customer)
   createdAt DateTime @default(now())
   cars      Car[]
+  sessions  Session[]
 }
+
+model Session {
+  id        String   @id @default(cuid())
+  tokenHash String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
 
 model Car {
   id          String   @id @default(cuid())

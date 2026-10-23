@@ -13,7 +13,7 @@ export default function NotFound() {
         </h1>
 
         <p className="mt-6 text-base leading-7 text-muted-foreground md:text-lg">
-          Sorry, we couldn't find the vehicle you're looking for.
+          Sorry, we couldn&apos;t find the vehicle you&apos;re looking for.
           It may have been sold, removed, or the URL may be incorrect.
         </p>
 

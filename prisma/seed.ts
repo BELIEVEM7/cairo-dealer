@@ -5,20 +5,19 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "@/lib/generated/prisma/client";
 
 const connectionString = process.env.DATABASE_URL;
-const adminPassword = process.env.ADMIN_SEED_PASSWORD;
-
 if (!connectionString) {
   throw new Error("DATABASE_URL is missing from .env");
-}
-
-if (!adminPassword) {
-  throw new Error("ADMIN_SEED_PASSWORD is missing from .env");
 }
 
 const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
+  const adminPassword = process.env.ADMIN_SEED_PASSWORD;
+  if (!adminPassword) {
+    throw new Error("ADMIN_SEED_PASSWORD is missing from .env");
+  }
+
   const hashedPassword = await bcrypt.hash(adminPassword, 12);
 
   // Create the administrator or update the existing seed account.

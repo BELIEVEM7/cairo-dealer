@@ -26,7 +26,7 @@ export async function loginAction(
     };
   }
 
-  await createSession();
+  await createSession(user.id);
 
   redirect("/dashboard");
 }

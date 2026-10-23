@@ -1,7 +1,6 @@
 "use client";
 
 export default function Error({
-  error,
   reset,
 }: {
   error: Error & { digest?: string };
@@ -19,7 +18,7 @@ export default function Error({
         </h1>
 
         <p className="mt-4 text-muted-foreground">
-          We couldn't load the cars right now.
+          We couldn&apos;t load the cars right now.
           Please try again.
         </p>
 
